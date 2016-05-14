@@ -1,0 +1,79 @@
+h1, h2, h3, h4, h5, h6
+{
+	padding: 0;
+	margin: 0;
+}
+tbody th, thead th
+{
+	text-align: left;
+}
+
+table.table thead tr th, table.table tbody tr td
+{
+	padding: 5px;
+}
+
+table.p-10 thead tr th, table.p-10 tbody tr td
+{
+	padding: 10px;
+}
+
+.align-right
+{
+	text-align: right;
+}
+
+.item-bold
+{
+	font-weight: bold;
+}
+
+.table-bordered
+{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table-bordered td, .table-bordered th
+{
+	border: 1px solid #9e9e9e;
+}
+
+.table-bordered td
+{
+	border-bottom: none;
+	border-top: none;
+}
+
+.table-bordered td.hanging
+{
+	border-left: none !important;
+	border-bottom: none !important;
+}
+
+.table-bordered tr.last td
+{
+	border-top: 1px solid #9e9e9e;
+}
+
+.centered 
+{
+	text-align: center;
+}
+
+.p-5
+{
+	padding: 5px;
+}
+
+.m-0
+{
+	margin: 0;
+}
+
+hr
+{
+	padding: 2px;
+	margin-bottom: 5px;
+	color: #eee;
+}

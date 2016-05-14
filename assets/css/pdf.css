@@ -1,0 +1,254 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+   border: 1px solid black;
+}
+
+td.head
+{
+	text-align: center;
+	font-size: 120%;
+	padding: 20px;
+}
+
+tr.project-details td
+{
+	padding: 10px;
+}
+
+table.pdf-table tr th, table.pdf-table tr td
+{
+	padding: 5px;
+}
+
+table.pdf-table-m-10 tr th, table.pdf-table-m-10 tr td
+{
+	padding: 10px;
+}
+
+table.pdf-table-m-10 thead tr th
+{
+	text-align: left;
+}
+table.pdf-table tbody tr td.total-cell-title
+{
+	padding: 15px ;
+	text-align: right;
+	font-weight: bold;
+	background-color: #eee;
+}
+
+
+td.total-cell-value
+{
+	padding: 15px;
+	font-weight: bold;
+	background-color: #eee;
+}
+.pdf-center
+{
+	text-align: center;
+}
+p.question_title, span.question_title
+{
+	font-weight: bold;
+	font-size: 100%;
+}
+.red
+{
+	color: red;
+}
+
+.green
+{
+	color: green;
+}
+
+table>thead>tr>th
+{
+	width: 25%;
+}
+
+.pdf-hold-image
+{
+	height: 100px;
+}
+
+.pdf-left
+{
+	float: left !important;
+}
+
+.pdf-right
+{
+	float: right !important;
+}
+.pdf-33
+{
+	width: 33.3333%;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.pdf-33 img
+{
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+	border: 0px none;
+}
+
+.ducts-container
+{
+	padding: 20px;
+	width: 100%;
+	border: 1px solid black;
+	
+}
+
+.ducts-container .top_duct
+{
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding: 10px;
+	width: 20%;
+	margin: 0 auto;
+}
+.ducts-container .right_duct
+{
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding: 20px;
+	width: 20%;
+	float: right;
+}
+.ducts-container .left_duct
+{
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding: 20px;
+	width: 20%;
+	float: left;
+}
+.ducts-container .bottom_duct
+{
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding: 10px;
+	width: 20%;
+	margin: 0 auto;
+}
+
+.third-portion
+{
+	width: 30%;
+	margin-left:70%;
+}
+
+.foc
+{
+	width: 100%;
+	height: 300px;
+	border: 1px solid black;
+}
+
+.foc_left
+{
+	width: 40%;
+	height: 300px;
+	float:left;
+	position:relative;
+}
+
+.foc_right
+{
+	width: 60%; 
+	height: 300px;
+	float:left;
+	position: relative;
+}
+
+.nofj
+{
+	text-align: center;
+	vertical-align: middle;
+	position: absolute;
+	bottom: 0;
+	right: 5%;
+	left: 0;
+	padding:15px;
+}
+
+.nofj_directive
+{
+	width: 80%;
+	float: left;
+	border-right: 1px solid black;
+}
+
+.nofj_number
+{
+	width: 20%;
+	float:left;
+}
+
+.ducts_top
+{
+	width: 100%;
+	height: 50px;
+}
+
+.ducts_middle
+{
+	width: 100%;
+	height: 200px;
+}
+
+.ducts_middle div
+{
+	height: 200px;
+	float:left;
+	padding: 10px;
+	text-align:center;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.ducts_middle .first_part
+{
+	width: 20%;
+}
+
+.ducts_middle .last_part
+{
+	width: 20%;
+}
+.ducts_middle div:first-child  a, .ducts_middle div:nth-child(3)  a
+{
+	width: 100%;
+	padding:2px;
+	display:block;
+}
+.ducts_middle div:nth-child(2)
+{
+	width: 60%;
+}
+.ducts_bottom
+{
+	width: 100%;
+	height: 50px;
+}
+
+img.pdf_image
+{
+	display: block;
+    max-width:100%;
+    max-height:800px;
+    width: auto;
+    height: auto;
+}
