@@ -98,6 +98,7 @@ class Account extends MY_Controller
 		
 		$data = $this->get_email_address($this->input->post('user_emailaddress'));
 		if($data == 0){
+			$insert_data = $this->input->post();
 			$template_data["first_name"] = $this->input->post('user_firstname');
 			$template_data["email_address"] = $this->input->post('user_emailaddress');
 			$template_data["last_name"] = $this->input->post('user_lastname');
@@ -110,7 +111,7 @@ class Account extends MY_Controller
 			
 			if($email_sent->status)
 			{
-				$added = $this->M_Account->adduser();
+				$added = $this->M_Account->adduser($insert_data);
 				if($added)
 				{
 					redirect(base_url().'Account/users');
@@ -306,6 +307,7 @@ class Account extends MY_Controller
 					'project_manager' => array(
 						'home',
 						'projects',
+						'projects_export',
 						'acceptance',
 						'laboursheet',
 						'wagestructure',
@@ -314,12 +316,19 @@ class Account extends MY_Controller
 					'finance' => array(
 						'home',
 						'laboursheet',
+						'projects',
+						'projects_export',
 						'wagestructure',
 						'wagestructure_edit',
 						'logout'
 					),
 					'acceptance' => array(
 						'acceptance',
+						'home',
+						'logout'
+					),
+					'noc_engineer' => array(
+						'fault_reporting',
 						'home',
 						'logout'
 					)

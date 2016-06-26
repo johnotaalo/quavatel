@@ -18,7 +18,8 @@
         <link href="<?php echo base_url(); ?>assets/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"> 
         <link href="<?php echo base_url(); ?>assets/vendors/bootgrid/jquery.bootgrid.min.css" rel="stylesheet">
         <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"  rel = "stylesheet">
-         <link href="<?php echo base_url(); ?>assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">      
+         <link href="<?php echo base_url(); ?>assets/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">    
             
         <!-- CSS -->
         <link href="<?php echo base_url(); ?>assets/css/app.min.1.css" rel="stylesheet">
@@ -27,6 +28,7 @@
         <script src="<?php echo base_url(); ?>assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
         <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
         <link href="<?php echo base_url(); ?>assets/vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css" rel="stylesheet">
         <script src="<?php echo base_url(); ?>assets/vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js"></script>
         <style>
@@ -137,7 +139,7 @@
                     <li>
                         <a id = "home" href="<?php echo base_url(); ?>"><i class="zmdi zmdi-home"></i> Home</a>
                     </li>
-                    <?php if($sidebar_details->user_type == "admin" || $sidebar_details->user_type == "project_manager"){?>
+                    <?php if($sidebar_details->user_type == "admin" || $sidebar_details->user_type == "project_manager" || $sidebar_details->user_type == "finance"){?>
                     <li>
                         <a id = "project" href="<?php echo base_url(); ?>Project"><i class="zmdi zmdi-router"></i> Projects</a>
                     </li>
@@ -179,6 +181,9 @@
                      <li>
                         <a data-href="<?php echo base_url(); ?>Company" id="company"><i class="zmdi zmdi-case"></i> Companies</a>
                     </li>
+                    <?php } ?>
+                    <?php if($sidebar_details->user_type == "noc_engineer" || $sidebar_details->user_type == "admin") { ?>
+                    <li><a data-href="<?php echo base_url(); ?>FaultReporting" id = "faultreporting"><i class = "zmdi zmdi-alert-triangle"></i> Fault Reporting</a></li>
                     <?php } ?>
                     <li>
                         <a data-href="<?php echo base_url(); ?>Account/logout" id="logout"><i class="zmdi zmdi-time-restore"></i> Logout</a>

@@ -369,7 +369,8 @@ class LabourSheet extends MY_Controller
 				$day_table .= "<td>". $pay->labourer_lastname . ", " . $pay->labourer_firstname . " ". $pay->labourer_othername."</td>";
 				$day_table .= "<td>{$pay->labourer_idno}</td>";
 				$day_table .= "<td>{$pay->project_name}</td>";
-				$day_table .= ($type == NULL) ? "<td>{$pay->wagestructure_task}</td>" : "<td>{$pay->task}</td>";
+				$quantity = ($pay->wage_structure_length != "") ? "<b>[{$pay->wage_structure_length} {$pay->wagestructure_unit}]</b>" : "";
+				$day_table .= ($type == NULL) ? "<td>{$pay->wagestructure_task}<br/>{$quantity}</td>" : "<td>{$pay->task}</td>";
 				$day_table .= "<td>{$pay->labourer_mobileno}</td>";
 				$day_table .= "<td>{$supervisor_name}</td>";
 				$day_table .= "<td>Ksh. ". number_format($pay->wage_amount) ."</td>";
@@ -442,7 +443,7 @@ class LabourSheet extends MY_Controller
 				$table .= "<td>{$value->labourer_mobileno}</td>";
 				$table .= "<td>Ksh. " . number_format($value->amount) . "</td>";
 				$table .= "<td>{$value->user_firstname} {$value->user_lastname}</td>";
-				$table .= "<td><a href = '".base_url()."LabourSheet/details/labourer/{$value->labourer_id}/{$from}/{$to}'>Details</a></td>";
+				$table .= "<td><a href = '".base_url()."LabourSheet/details/labourer/{$value->labourer_id}/{$from}/{$to}'>Details <small> & editting</small></a></td>";
 				$table .= '</tr>';
 			}
 		}

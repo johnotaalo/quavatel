@@ -37,10 +37,10 @@ class M_Account extends CI_Model
 		$this->db->query("UPDATE tbl_users SET user_status = {$status} WHERE user_id = {$user_id}");
 	}
 	
-	function adduser()
+	function adduser($insert_data)
 	{
-		$_POST['user_password'] = md5($this->input->post('user_password'));
-		$added = $this->db->insert("tbl_users", $this->input->post());
+		$insert_data['user_password'] = md5($this->input->post('user_password'));
+		$added = $this->db->insert("tbl_users", $insert_data);
 		return $added;
 	}
 	
@@ -58,7 +58,7 @@ class M_Account extends CI_Model
 	
 	function delete_user($user_id)
 	{
-		$this->db->query("DELETE FROM tbl_users WHERE user_id = {$user_id}");
+		$this->db->query("UPDATE tbl_users SET user_status = 0 WHERE user_id = {$user_id}");
 	}
 
 	function get_user_permission($identifier, $value)

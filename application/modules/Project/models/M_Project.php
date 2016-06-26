@@ -151,6 +151,7 @@ class M_Project extends CI_Model
 	function project_acceptance_exists($project_id)
 	{
 		$this->db->where('project_id', $project_id);
+		$this->db->where_in('project_type', ['fat', 'osp', 'isp']);
 		$query = $this->db->get('tbl_projects_acceptance');
 
 		if ($query->num_rows() > 0) {
