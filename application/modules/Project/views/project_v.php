@@ -20,9 +20,9 @@
 				<tr>
 					<th>#</th>
 					<th data-column-id="project_name">Project Name</th>
-					<th data-column-id="company_name">Client Name</th>
-					<th data-column-id="site_name">Site Name</th>
-					<th data-column-id="start_date">Date Added</th>
+					<th data-column-id="company_name">Start Date</th>
+					<th data-column-id="site_name">End Date</th>
+					<th data-column-id="start_date">Status</th>
 					<th>Action</th>
 				</tr>
 			</thead>

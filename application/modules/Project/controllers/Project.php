@@ -20,7 +20,7 @@ class Project extends MY_Controller
 		$this->template->call_dashboard_template($data);
 	}
 
-	function create_projects_table()
+	function create_projects_table($type = null)
 	{
 		$this->account->verify_session('projects');
 		$projects_table = "";
@@ -59,14 +59,16 @@ class Project extends MY_Controller
 					}
 					$projects_table .= "</td>";
 					$user_permission = $this->M_Account->get_user_permission('user_id', $this->session->userdata('user_id'));
-					if($user_permission == "admin")
-					{
-						$projects_table .= "<td><center>";
-						$projects_table .= "<a class = 'edit-button' data-url = '".base_url()."Project/editproject/{$value->project_id}' href = '#'><i class = 'zmdi zmdi-edit'></i></a> | ";
-					
-						$projects_table .= "<a href = '".base_url()."Project/deleteproject/{$value->project_id}' class = 'delete-button'><i class = 'zmdi zmdi-delete'></i></a>";
-						$project_table .= "</td></center>";
+					if($type != "pdf"){
+						if($user_permission == "admin")
+						{
+							$projects_table .= "<td><center>";
+							$projects_table .= "<a class = 'edit-button' data-url = '".base_url()."Project/editproject/{$value->project_id}' href = '#'><i class = 'zmdi zmdi-edit'></i></a> | ";
+						
+							$projects_table .= "<a href = '".base_url()."Project/deleteproject/{$value->project_id}' class = 'delete-button'><i class = 'zmdi zmdi-delete'></i></a>";
+							$project_table .= "</td></center>";
 
+						}
 					}
 					$projects_table .= "</tr>";
 					$counter++;
@@ -408,9 +410,71 @@ function export($project_type, $project_id, $export_type)
 
 function export_projects($type)
 {
-	$this->account->verify_session('acceptance');
-	echo "<pre>";
-	echo "<h2>STILL UNDER CONSTRUCTION</h2>";
+	$this->account->verify_session('projects_export');
+
+	if ($type == "pdf") {
+		$data['table_data'] = $this->create_projects_table($type);
+		$data['title'] = "Quavatel-Project-List-" . date('his');
+		$data['view'] = 'Project/project_pdf';
+		$data['orientation'] = "landscape";
+
+		$this->export->export_report($data, $type);
+	}
+	else if ($type == "excel") {
+		$projects = $this->M_Project->get_all_projects();
+
+		$excel_data = array();
+		$excel_data[0] = [
+			'No.',
+			'Project Name',
+			'Start Date',
+			'End Date',
+			'Status'
+		];
+		if ($projects) {
+			$counter = 1;
+			foreach ($projects as $project) {
+				if ($project->project_approved != 0) {
+					$project_status = "";
+					$date_today = time();
+					$project_enddate = strtotime($project->project_enddate . " 23:59:59");
+					if(($date_today) > $project_enddate)
+					{
+						$acceptance_exists = $this->project_acceptance_exists($project->project_id);
+						if($acceptance_exists)
+						{
+							$project_status = 'Completed';
+							
+						}
+						else
+						{
+							$project_status = 'Awaiting Acceptance';
+						}
+					}
+					else if(($date_today) < $project_enddate)
+					{
+						$project_status .= 'Ongoing';
+					}
+					$excel_data[] = [
+						$counter,
+						$project->project_name,
+						date("jS F Y", strtotime($project->project_startdate)),
+						date("jS F Y", strtotime($project->project_enddate)),
+						$project_status
+					];
+
+					$counter++;			
+				}
+			}
+
+			$this->export->quick_array_excel($excel_data, "QUAVATEL PROJECT LIST");
+		}
+	}
+	
+
+	$project_pdf_table = "";
+	$excel_export = array();
+
 }
 function quick_edit()
 {

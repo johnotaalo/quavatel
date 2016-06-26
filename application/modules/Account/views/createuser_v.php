@@ -44,7 +44,20 @@
 					<p style = 'color:red' id = "error_message"><?php echo $this->session->flashdata('error'); ?></p>
 				</div>
 			</div>
-			
+			<div class = "row">
+				<div class="col-xs-8">
+
+					<div class="input-group fg-float phone">
+						<span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+						<div class="fg-line">
+							<input type="text" class="form-control" name = "user_phonenumber" value = "<?php if ($error){echo $this->session->flashdata('user_phonenumber');}elseif(isset($user_details)){ echo $user_details->user_phonenumber; } ?>">
+							<label class="fg-label">Phone Number</label>
+						</div>
+						
+					</div>
+					<p style = 'color:red' id = "error_message"><?php echo $this->session->flashdata('error'); ?></p>
+				</div>
+			</div>
 			<div class = "row">
 				<div class="col-xs-8">
 
@@ -56,7 +69,8 @@
 									$user_types = array(
 										'project_manager' => "Project Manager",
 										'acceptance' => "Access to Acceptance",
-										'finance' => "Finance Department"
+										'finance' => "Finance Department",
+										'noc_engineer' => "NOC Engineer"
 									);
 
 									foreach ($user_types as $value => $name) {
@@ -67,9 +81,6 @@
 									 	echo ">{$name}</option>";
 									 } 
 								?>
-								<!-- <option value = "project_manager">Project Manager</option>
-								<option value = "acceptance">Access to Acceptance</option>
-								<option value = "finance">Finance Department</option> -->
 							</select>
 						</div>
 						

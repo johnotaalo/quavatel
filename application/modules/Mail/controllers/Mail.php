@@ -12,65 +12,90 @@ class Mail extends MY_Controller
 	{
 		$end_data = array();
 		$mail = new PHPMailer();
-		if(gethostname() == "homestead"){
-		        $mail->IsSMTP();
-		        $mail->IsHTML(); 
-		        $mail->SMTPAuth   = true; 
-		        $mail->SMTPSecure = "tls"; 
-		        $mail->Host       = "server.penumos.com";      
-		        $mail->Port       = 587;                  
-		        $mail->Username   = "app@quavatel.co.ke";  
-		        $mail->Password   = "@kenya2030#";            
-		        $mail->SetFrom('app@quavatel.co.ke', 'Quavatel Mailing System');  
-			$mail->AddReplyTo("no-reply@quavatel.co.ke","No Reply");  
+		// if(gethostname() == "homestead"){
+		//         $mail->IsSMTP();
+		//         $mail->IsHTML(); 
+		//         $mail->SMTPAuth   = true; 
+		//         $mail->SMTPSecure = "tls"; 
+		//         $mail->Host       = "server.penumos.com";      
+		//         $mail->Port       = 587;                  
+		//         $mail->Username   = "app@quavatel.co.ke";  
+		//         $mail->Password   = "@kenya2030#";            
+		//         $mail->SetFrom('app@quavatel.co.ke', 'Quavatel Mailing System');  
+		// 	$mail->AddReplyTo("no-reply@quavatel.co.ke","No Reply");  
 		        
-		        $mail->Subject    = $data["subject"];
-		        $mail->Body      = $data["message"];
-		        $destino = $data["email_address"];
-		        $mail->AddAddress($destino, "Chrispine Otaalo");
+		//         $mail->Subject    = $data["subject"];
+		//         $mail->Body      = $data["message"];
+		//         $destino = $data["email_address"];
+		//         $mail->AddAddress($destino, "Chrispine Otaalo");
 		        
-		        if(!$mail->Send()) {
-		            $end_data["message"] = "Error: " . $mail->ErrorInfo;
-		            $end_data["status"] = FALSE;
-		        } else {
-		            $end_data["message"] = "Message sent correctly!";
-		            $end_data["status"] = TRUE;
-		        }
+		//         if(!$mail->Send()) {
+		//             $end_data["message"] = "Error: " . $mail->ErrorInfo;
+		//             $end_data["status"] = FALSE;
+		//         } else {
+		//             $end_data["message"] = "Message sent correctly!";
+		//             $end_data["status"] = TRUE;
+		//         }
 	        
 	       
-	    }
-	    else
-	    {
-			$mail->IsSMTP(); // Use SMTP
-			$mail->IsHTML();
-			$mail->Host        = "smtp.gmail.com"; // Sets SMTP server
-			$mail->SMTPDebug   = 2; // 2 to enable SMTP debug information
-			$mail->SMTPAuth    = TRUE; // enable SMTP authentication
-			//$mail->SMTPSecure  = "tls"; //Secure conection
-			$mail->Port        = 25; // set the SMTP port
-			$mail->Username    = 'chrizota@gmail.com'; // SMTP account username
-			$mail->Password    = 'Chrispine-2014'; // SMTP account password
-			$mail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
-			$mail->CharSet     = 'UTF-8';
-			$mail->Subject     = $data["subject"];
-			$mail->ContentType = 'text/html; charset=utf-8\r\n';
-			$mail->From        = 'chrispinethesim@gmail.com';
-			$mail->FromName    = 'Quavatel App';
+	 //    }
+	 //    else
+	 //    {
+		// 	$mail->IsSMTP(); // Use SMTP
+		// 	$mail->IsHTML();
+		// 	$mail->Host        = "smtp.gmail.com"; // Sets SMTP server
+		// 	$mail->SMTPDebug   = 2; // 2 to enable SMTP debug information
+		// 	$mail->SMTPAuth    = TRUE; // enable SMTP authentication
+		// 	//$mail->SMTPSecure  = "tls"; //Secure conection
+		// 	$mail->Port        = 25; // set the SMTP port
+		// 	$mail->Username    = 'chrizota@gmail.com'; // SMTP account username
+		// 	$mail->Password    = 'Chrispine-2014'; // SMTP account password
+		// 	$mail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
+		// 	$mail->CharSet     = 'UTF-8';
+		// 	$mail->Subject     = $data["subject"];
+		// 	$mail->ContentType = 'text/html; charset=utf-8\r\n';
+		// 	$mail->From        = 'chrispinethesim@gmail.com';
+		// 	$mail->FromName    = 'Quavatel App';
 
-			$destino = $data["email_address"];
-			$mail->AddAddress($destino, "Chrispine Otaalo");
-			$mail->isHTML( TRUE );
-			$mail->Body = $data["message"];
-			if(!$mail->Send()) {
-				$end_data["message"] = "Error: " . $mail->ErrorInfo;
-				$end_data["status"] = FALSE;
-			} else {
-				$end_data["message"] = "Message sent correctly!";
-				$end_data["status"] = TRUE;
-			}
-			$mail->SmtpClose();
-	    }
-	     return (object)$end_data;
+		// 	$destino = $data["email_address"];
+		// 	$mail->AddAddress($destino, "Chrispine Otaalo");
+		// 	$mail->isHTML( TRUE );
+		// 	$mail->Body = $data["message"];
+		// 	if(!$mail->Send()) {
+		// 		$end_data["message"] = "Error: " . $mail->ErrorInfo;
+		// 		$end_data["status"] = FALSE;
+		// 	} else {
+		// 		$end_data["message"] = "Message sent correctly!";
+		// 		$end_data["status"] = TRUE;
+		// 	}
+		// 	$mail->SmtpClose();
+	 //    }
+		$url = 'http://www.symatechlabs.com/sendmail/sendmail.php';
+		//open connection
+		$ch = curl_init();
+
+		$_POST = [
+			'mail_to' => ['email' => $data['email_address'], 'name' => "Sample Name"],
+			'subject' => $data['subject'],
+			'message' => $data['message']
+		];
+
+		$fields_string = http_build_query($_POST);
+		//set the url, number of POST vars, POST data
+		curl_setopt($ch,CURLOPT_URL, $url);
+		curl_setopt($ch,CURLOPT_POST, count($_POST));
+		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+		curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+		//execute post
+		$result = curl_exec($ch);
+		//close connection
+		curl_close($ch);
+
+		$end_data["message"] = "Message sent correctly!";
+		$end_data["status"] = TRUE;
+	    return (object)$end_data;
 	}
 
 	function send_email($data)
@@ -104,5 +129,10 @@ class Mail extends MY_Controller
 			{
 				show_error($this->email->print_debugger());
 			}
+	}
+
+	function send_quavatel_email($data)
+	{
+
 	}
 }
